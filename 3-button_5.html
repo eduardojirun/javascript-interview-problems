@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Button 5</title>
+</head>
+<body>
+  
+</body>
+</html>
+
+<script>
+  // 3.- Analiza y describe que hace el siguiente código
+  // 3.1 - Cómo corregirías el problema
+  /* function createButtons() {
+      for (var i = 1; i <= 5; i++) {console.log(i, 'inicio');      
+        var body = document.getElementsByTagName("BODY")[0];
+        var button = document.createElement("BUTTON");
+        button.innerHTML = 'Button ' + i;
+        button.onclick = function() {
+            alert('Boton numero: ' + i);
+        }
+        body.appendChild(button);
+      }
+      console.log(i, 'afuera');      
+  }
+  createButtons(); */
+</script>
+
+<script>
+  // Respuesta
+  // ¿porque pasa esto?
+  // r: var tiene un ambito de funcion y saliendo de los bloques sigue existiendo,
+  // cada boton toma el valor de referencia que es 6 al salir del bloque.
+  // cambiando var por let para limitar el ambito de la variable
+  // evitar el uso de var, sustituir por let o const
+  /* function createButtons() {
+      for (let i = 1; i <= 5; i++) {console.log(i, 'inicio');      
+        let body = document.getElementsByTagName("BODY")[0];
+        let button = document.createElement("BUTTON");
+        button.innerHTML = 'Button ' + i;
+        button.onclick = function() {
+            alert('Boton numero: ' + i);
+        }
+        body.appendChild(button);
+      }
+      console.log(i, 'afuera');  // Uncaught ReferenceError: i is not defined    
+  }
+  createButtons(); */
+</script>
+
+<script>
+  // Respuesta 2
+  // creando una funcion autoejecutable para limitar el ambito de la variable
+  function createButtons() {
+      for (var i = 1; i <= 5; i++) {console.log(i, 'inicio');      
+        var body = document.getElementsByTagName("BODY")[0];
+        var button = document.createElement("BUTTON");
+        button.innerHTML = 'Button ' + i;
+        /* (function(num) {   
+          button.onclick = function() {
+              alert('Boton numero: ' + num);
+          }
+        })(i) */
+        
+        ((num) =>   
+          button.onclick = function() {
+              alert('Boton numero: ' + num);
+          }
+        )(i)
+        body.appendChild(button);
+      }
+      console.log(i, 'afuera');  // Uncaught ReferenceError: i is not defined    
+  }
+  createButtons();
+</script>
