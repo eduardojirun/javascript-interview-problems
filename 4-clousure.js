@@ -6,25 +6,21 @@
 // 2.- Alcance envolvente (puede ser alcance de bloque, función o módulo)
 // 3.- Alcance global
 
-function makeSizer(size) {
-    return function () {
-      document.body.style.fontSize = `${size}px`;
-    };
+const variableGlobal = 'variable global';
+function funExterior(parametro1) {
+    const var1 = 'variable 1';
+    function funInterna(parametro2) {
+        const var2 = 'variable 2';
+
+        console.log('variableGlobal', variableGlobal);
+        console.log('param1', parametro1);
+        console.log('var1', var1);
+        console.log('param2', parametro2);
+        console.log('var2', var2);        
+    }
+    funInterna('parametro uno');
 }
-  
-const size12 = makeSizer(12);
-const size14 = makeSizer(14);
-const size16 = makeSizer(16);
-
-document.getElementById("size-12").onclick = size12;
-document.getElementById("size-14").onclick = size14;
-document.getElementById("size-16").onclick = size16;
-
-/* 
-<button id="size-12">12</button>
-<button id="size-14">14</button>
-<button id="size-16">16</button>
- */
+funExterior('parametro dos');
 
 // =============EJEMPLO 2==================================
 // como metodo privado
